@@ -45,6 +45,7 @@ import { UIConditionContext, UIManager } from './uimanager';
 import { UIConfig } from './uiconfig';
 import { PlayerAPI } from 'bitmovin-player';
 import { i18n } from './localization/i18n';
+import { CustomCloseButton } from './components/customclosebutton';
 
 export namespace UIFactory {
 
@@ -278,6 +279,7 @@ export namespace UIFactory {
             new VolumeToggleButton(),
             new SettingsToggleButton({ settingsPanel: settingsPanel }),
             new FullscreenToggleButton(),
+            new CustomCloseButton(),
           ],
         }),
         settingsPanel,

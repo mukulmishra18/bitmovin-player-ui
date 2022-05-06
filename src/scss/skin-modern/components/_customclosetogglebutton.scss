@@ -1,0 +1,12 @@
+@import '../variables';
+@import '../mixins';
+
+.#{$prefix}-ui-customclosetogglebutton {
+  @extend %ui-button;
+
+  background-image: svg('assets/skin-modern/images/close.svg');
+
+  &.#{$prefix}-disabled {
+    opacity: .3;
+  }
+}
