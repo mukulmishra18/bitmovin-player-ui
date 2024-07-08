@@ -4,15 +4,64 @@
 .#{$prefix}-ui-quickseekbutton {
   @extend %ui-button;
 
-  &:hover {
-    @include svg-icon-shadow;
-  }
+  //&:hover {
+  //  @include svg-icon-shadow;
+  //}
 
   &[data-#{$prefix}-seek-direction='forward'] {
-    background-image: url('../../assets/skin-modern/images/quickseek-fastforward.svg');
+    background-image: url('../../assets/skin-more-modern/images/quickseek-fastforward.svg');
+
+    &.flash {
+      border-top-left-radius: 33%;
+      border-bottom-left-radius: 33%;
+    }
   }
 
   &[data-#{$prefix}-seek-direction='rewind'] {
-    background-image: url('../../assets/skin-modern/images/quickseek-rewind.svg');
+    background-image: url('../../assets/skin-more-modern/images/quickseek-rewind.svg');
+
+    &.flash {
+      border-top-right-radius: 33%;
+      border-bottom-right-radius: 33%;
+    }
+  }
+
+  @keyframes flash {
+    to {
+      background-color: rgba(192, 192, 192, 0.38);
+    }
+  }
+
+  &.flash {
+    opacity: 1;
+    //background-color: rgba(192 192 192 / 23%);
+    animation: flash 0.5s 2 alternate ease-out;
+    filter: none;
+  }
+
+  //opacity: 1;
+  //transition: hidden-animated-transition($animation-duration);
+  //visibility: visible;
+
+  &.#{$prefix}-hidden {
+    //opacity: 0;
+    transition: background-image $animation-duration;
+    //visibility: hidden;
+    background-image: unset;
+
+    //width: 30% !important;
+    height: 100% !important;
+    //position: absolute;
+    //top: 0;
+    //bottom: 0;
+    display: block !important;
+
+    //&[data-#{$prefix}-seek-direction='forward'] {
+    //  right: 0;
+    //}
+    //
+    //&[data-#{$prefix}-seek-direction='rewind'] {
+    //  left: 0;
+    //}
   }
 }

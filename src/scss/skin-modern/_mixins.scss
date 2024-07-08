@@ -120,11 +120,11 @@
 }
 
 @mixin svg-icon-shadow {
-  filter: drop-shadow(0 0 1px $color-primary);
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.25));
 }
 
 @mixin svg-icon-on-shadow {
-  filter: drop-shadow(0 0 1px $color-highlight);
+//  filter: drop-shadow(0 0 1px $color-highlight);
 }
 
 @mixin seekbar-position-marker($marker-dimension) {

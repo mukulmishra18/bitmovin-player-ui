@@ -71,7 +71,7 @@ export class QuickSeekButton extends Button<QuickSeekButtonConfig> {
     timeShiftDetector.detect();
     liveStreamDetector.detect();
 
-    this.onClick.subscribe(() => {
+    const handleSeekIntention = () => {
       if (isLive && !hasTimeShift) {
         // If no DVR window is available, the button should be hidden anyway, so this is to be absolutely sure
         return;
@@ -83,11 +83,11 @@ export class QuickSeekButton extends Button<QuickSeekButtonConfig> {
       }
 
       const currentPosition =
-        this.currentSeekTarget !== null
-          ? this.currentSeekTarget
-          : isLive
-            ? player.getTimeShift()
-            : player.getCurrentTime();
+          this.currentSeekTarget !== null
+              ? this.currentSeekTarget
+              : isLive
+                  ? player.getTimeShift()
+                  : player.getCurrentTime();
 
       const newSeekTime = currentPosition + this.config.seekSeconds;
 
@@ -98,12 +98,59 @@ export class QuickSeekButton extends Button<QuickSeekButtonConfig> {
         const clampedValue = PlayerUtils.clampValueToRange(newSeekTime, 0, player.getDuration());
         player.seek(clampedValue);
       }
+    };
+
+    let clickTime = 0;
+    let doubleClickTime = 0;
+
+    let hideUiTime = 0;
+
+    this.onClick.subscribe(() => {
+      let now = Date.now();
+
+      if (now - clickTime < 200) {
+        // We have a double click inside the 200ms interval, just toggle fullscreen mode
+        handleSeekIntention();
+
+        this.getDomElement().addClass('flash');
+        setTimeout(() => {
+          this.getDomElement().removeClass('flash');
+        }, 1000);
+
+        doubleClickTime = now;
+        return;
+      }
+
+      clickTime = now;
+
+      if (uimanager.getUI().isUiShown) {
+        handleSeekIntention();
+      }
+
+      if (Date.now() - hideUiTime > 200) {
+        setTimeout(() => {
+          if (Date.now() - doubleClickTime > 200) {
+            if (!uimanager.getUI().isUiShown) {
+              uimanager.getUI().showUi();
+            }
+          }
+        }, 200);
+      }
     });
 
     this.player.on(this.player.exports.PlayerEvent.Seek, this.onSeek);
     this.player.on(this.player.exports.PlayerEvent.Seeked, this.onSeekedOrTimeShifted);
     this.player.on(this.player.exports.PlayerEvent.TimeShift, this.onTimeShift);
     this.player.on(this.player.exports.PlayerEvent.TimeShifted, this.onSeekedOrTimeShifted);
+
+    uimanager.onControlsShow.subscribe(() => {
+      this.show();
+    });
+
+    uimanager.onControlsHide.subscribe(() => {
+      this.hide();
+      hideUiTime = Date.now();
+    });
   }
 
   private onSeek = (event: SeekEvent): void => {

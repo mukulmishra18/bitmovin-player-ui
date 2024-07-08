@@ -141,5 +141,13 @@ export class PlaybackToggleButton extends ToggleButton<PlaybackToggleButtonConfi
 
     // Startup init
     playbackStateHandler();
+
+    uimanager.onControlsShow.subscribe(() => {
+      this.show();
+    });
+
+    uimanager.onControlsHide.subscribe(() => {
+      this.hide();
+    });
   }
 }

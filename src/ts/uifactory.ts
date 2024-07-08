@@ -51,6 +51,7 @@ import { SpatialNavigation } from './spatialnavigation/spatialnavigation';
 import { RootNavigationGroup } from './spatialnavigation/rootnavigationgroup';
 import { ListNavigationGroup, ListOrientation } from './spatialnavigation/ListNavigationGroup';
 import { EcoModeContainer } from './components/ecomodecontainer';
+import {QuickSeekButton} from './components/quickseekbutton';
 
 export namespace UIFactory {
   export function buildDefaultUI(player: PlayerAPI, config: UIConfig = {}): UIManager {
@@ -152,7 +153,7 @@ export namespace UIFactory {
             new PlaybackToggleButton(),
             new VolumeToggleButton(),
             new VolumeSlider(),
-            new Spacer(),
+            // new Spacer(),
             new PictureInPictureToggleButton(),
             new AirPlayToggleButton(),
             new CastToggleButton(),
@@ -288,6 +289,17 @@ export namespace UIFactory {
           ],
           cssClasses: ['controlbar-top'],
         }),
+        new Container({
+          components: [
+            // new PlaybackToggleButton(),
+            new VolumeToggleButton(),
+            new Spacer(),
+            new SettingsToggleButton({ settingsPanel: settingsPanel }),
+            new PictureInPictureToggleButton(),
+            new FullscreenToggleButton(),
+          ],
+          cssClasses: ['controlbar-bottom'],
+        }),
       ],
     });
 
@@ -296,19 +308,36 @@ export namespace UIFactory {
         subtitleOverlay,
         new BufferingOverlay(),
         new CastStatusOverlay(),
-        new PlaybackToggleOverlay(),
+        new PlaybackToggleOverlay({
+          components: [
+            new QuickSeekButton({
+              seekSeconds: -15,
+              acceptsTouchWithUiHidden: true,
+              shouldShowUIOnHiddenInteraction: false,
+            }),
+            new PlaybackToggleButton(),
+            new QuickSeekButton({
+              seekSeconds: 15,
+              acceptsTouchWithUiHidden: true,
+              shouldShowUIOnHiddenInteraction: false,
+            }),
+          ],
+        }),
         new RecommendationOverlay(),
         controlBar,
         new TitleBar({
           components: [
             new MetadataLabel({ content: MetadataLabelContent.Title }),
+            new Spacer(),
             new CastToggleButton(),
-            new VRToggleButton(),
-            new PictureInPictureToggleButton(),
             new AirPlayToggleButton(),
-            new VolumeToggleButton(),
-            new SettingsToggleButton({ settingsPanel: settingsPanel }),
-            new FullscreenToggleButton(),
+            new VRToggleButton(),
+            // new CastToggleButton(),
+            // new VRToggleButton(),
+            // new PictureInPictureToggleButton(),
+            // new VolumeToggleButton(),
+            // new SettingsToggleButton({ settingsPanel: settingsPanel }),
+            // new FullscreenToggleButton(),
           ],
         }),
         settingsPanel,
@@ -325,26 +354,59 @@ export namespace UIFactory {
     });
   }
 
+  let controlBar = new ControlBar({
+    components: [
+      new Container({
+        components: [
+          new Spacer(),
+          new AdSkipButton(),
+        ],
+        cssClasses: ['controlbar-top'],
+      }),
+      new Container({
+        components: [
+          new PlaybackTimeLabel({
+            timeLabelMode: PlaybackTimeLabelMode.CurrentTime,
+            hideInLivePlayback: true,
+          }),
+          new SeekBar({ label: new SeekBarLabel() }),
+          new PlaybackTimeLabel({
+            timeLabelMode: PlaybackTimeLabelMode.TotalTime,
+            cssClasses: ['text-right'],
+          }),
+        ],
+        cssClasses: ['controlbar-top'],
+      }),
+      new Container({
+        components: [
+          new PlaybackToggleButton(),
+          new VolumeToggleButton(),
+          new Spacer(),
+          new PictureInPictureToggleButton(),
+          new FullscreenToggleButton(),
+        ],
+        cssClasses: ['controlbar-bottom'],
+      }),
+    ],
+  });
+
   export function modernSmallScreenAdsUI() {
     return new UIContainer({
       components: [
         new BufferingOverlay(),
         new AdClickOverlay(),
         new PlaybackToggleOverlay(),
+        controlBar,
         new TitleBar({
           components: [
             // dummy label with no content to move buttons to the right
             new Label({ cssClass: 'label-metadata-title' }),
-            new FullscreenToggleButton(),
+            new Spacer(),
           ],
-        }),
-        new Container({
-          components: [new AdMessageLabel({ text: 'Ad: {remainingTime} secs' }), new AdSkipButton()],
-          cssClass: 'ui-ads-status',
         }),
       ],
       cssClasses: ['ui-skin-ads', 'ui-skin-smallscreen'],
-      hideDelay: 2000,
+      hideDelay: -1,
       hidePlayerStateExceptions: [
         PlayerUtils.PlayerState.Prepared,
         PlayerUtils.PlayerState.Paused,

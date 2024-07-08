@@ -1,5 +1,10 @@
 import {Container, ContainerConfig} from './container';
 import {HugePlaybackToggleButton} from './hugeplaybacktogglebutton';
+import {Spacer} from './spacer';
+import {PlaybackToggleButton} from './playbacktogglebutton';
+import {PlayerAPI} from 'bitmovin-player';
+import {UIInstanceManager} from '../uimanager';
+import {QuickSeekButton} from './quickseekbutton';
 
 export interface PlaybackToggleOverlayConfig extends ContainerConfig {
   /**
@@ -15,18 +20,15 @@ export interface PlaybackToggleOverlayConfig extends ContainerConfig {
  */
 export class PlaybackToggleOverlay extends Container<PlaybackToggleOverlayConfig> {
 
-  private playbackToggleButton: HugePlaybackToggleButton;
-
   constructor(config: PlaybackToggleOverlayConfig = {}) {
     super(config);
 
-    this.playbackToggleButton = new HugePlaybackToggleButton({
-      enterFullscreenOnInitialPlayback: Boolean(config.enterFullscreenOnInitialPlayback),
-    });
-
     this.config = this.mergeConfig(config, {
       cssClass: 'ui-playbacktoggle-overlay',
-      components: [this.playbackToggleButton],
     }, this.config);
+  }
+
+  configure(player: PlayerAPI, uimanager: UIInstanceManager) {
+    super.configure(player, uimanager);
   }
 }

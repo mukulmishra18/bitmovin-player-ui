@@ -22,6 +22,8 @@ export interface ButtonConfig extends ComponentConfig {
    * Default: false
    */
   acceptsTouchWithUiHidden?: boolean;
+
+  shouldShowUIOnHiddenInteraction?: boolean;
 }
 
 /**
@@ -41,6 +43,7 @@ export class Button<Config extends ButtonConfig> extends Component<Config> {
       role: 'button',
       tabIndex: 0,
       acceptsTouchWithUiHidden: false,
+      shouldShowUIOnHiddenInteraction: true,
     } as Config, this.config);
   }
 

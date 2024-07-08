@@ -3,18 +3,24 @@
 
 .#{$prefix}-ui-playbacktogglebutton {
   @extend %ui-button;
+  @include hidden-animated;
 
-  background-image: url('../../assets/skin-modern/images/play.svg');
+  background-image: url('../../assets/skin-more-modern/images/play.svg');
 
-  &:hover {
-    @include svg-icon-shadow;
-  }
+  //&:hover {
+  //  @include svg-icon-shadow;
+  //}
 
   &.#{$prefix}-on {
-    background-image: url('../../assets/skin-modern/images/pause.svg');
+    background-image: url('../../assets/skin-more-modern/images/pause.svg');
 
     &.#{$prefix}-stoptoggle {
       background-image: url('../../assets/skin-modern/images/stop.svg');
     }
+  }
+
+  &.#{$prefix}-hidden {
+    display: block !important;
+    background-image: unset;
   }
 }

@@ -3,38 +3,22 @@
 // sass-lint:disable nesting-depth
 .#{$prefix}-ui-skin-ads {
 
-  .#{$prefix}-ui-ads-status {
-    background-color: $color-background-bars;
-    left: 1.5em;
-    padding: .5em 1.5em;
-    position: absolute;
-    top: 1em;
+  .#{$prefix}-ui-button-ad-skip {
+    @extend %ui-button;
 
-    .#{$prefix}-ui-label-ad-message {
-      @extend %ui-label;
+    width: 10em;
+    margin-bottom: 10px !important;
+    margin-right: 0 !important;
 
-      color: $color-secondary;
-      white-space: normal;
-    }
+    .#{$prefix}-label {
+      color: rgba(255, 199, 55, 1) !important;
+      display: inherit;
+      background-color: rgba(0, 0, 0, 0.25);
+      border-radius: 25px;
+      padding: 4px 2px;
 
-    .#{$prefix}-ui-button-ad-skip {
-      @extend %ui-button;
+        text-decoration: none;
 
-      .#{$prefix}-label {
-        display: inherit;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      // Add the dot between ad message and skip button
-      &::before {
-        color: $color-highlight;
-        content: '●';
-        padding-left: .5em;
-        padding-right: .5em;
-      }
     }
   }
 
@@ -56,6 +40,22 @@
       padding: 1em 1.5em;
       top: auto;
       width: 100%;
+    }
+  }
+
+  .#{$prefix}-seekbar {
+    pointer-events: none !important;
+
+    .#{$prefix}-seekbar-playbackposition {
+      background-color: rgba(255, 199, 55, 1) !important;
+    }
+
+    .#{$prefix}-seekbar-bufferlevel {
+      display: none;
+    }
+
+    .#{$prefix}-seekbar-playbackposition-marker {
+      display: none;
     }
   }
 }

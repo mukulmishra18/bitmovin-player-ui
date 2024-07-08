@@ -1,13 +1,15 @@
 @import '../variables';
+@import '../mixins';
 
 %ui-button {
   @extend %ui-component;
+  @include svg-icon-shadow;
 
   background-color: transparent;
   background-origin: content-box;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 1.5em;
+  background-size: 1.2em;
   border: 0;
   box-sizing: content-box;
   cursor: pointer;
@@ -15,6 +17,12 @@
   height: 1.5em;
   min-width: 1.5em;
   padding: .25em;
+
+  scale: 1;
+  transition-timing-function: ease-in-out;
+  transition: scale 0.2s;
+
+  -webkit-tap-highlight-color: transparent;
 
   .#{$prefix}-label {
     color: $color-primary;
@@ -38,6 +46,12 @@
 
   @include hidden;
   @include focusable;
+
+  &:active {
+    scale: 0.8;
+    transition-timing-function: ease-in-out;
+    transition: scale 0.2s;
+  }
 }
 
 .#{$prefix}-ui-button {

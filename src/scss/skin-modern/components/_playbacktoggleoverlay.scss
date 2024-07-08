@@ -3,8 +3,49 @@
 
 .#{$prefix}-ui-playbacktoggle-overlay {
   @extend %ui-container;
+  @include layout-cover;
+  //@include layout-center-children-in-container;
+  @include hidden-animated-focusable;
 
-  .#{$prefix}-ui-hugeplaybacktogglebutton {
+  > .#{$prefix}-container-wrapper {
     @include layout-cover;
+    display: inline-flex;
+    align-items: center;
+    //justify-content: space-evenly;
   }
+
+  .#{$prefix}-ui-playbacktogglebutton {
+    height: 4em;
+    width: 4em;
+    background-size: 4em;
+    flex-grow: 1;
+  }
+
+  .#{$prefix}-ui-quickseekbutton {
+    height: 2em;
+    width: 2em;
+    background-size: 2em;
+    flex-grow: 1;
+
+    //transition-property: width, height, top, bottom, left, right;
+  }
+
+  //&.#{$prefix}-hidden {
+  //  .#{$prefix}-ui-quickseekbutton {
+  //    width: 30% !important;
+  //    height: 100% !important;
+  //    position: absolute;
+  //    top: 0;
+  //    bottom: 0;
+  //
+  //
+  //    &[data-#{$prefix}-seek-direction='forward'] {
+  //      right: 0;
+  //    }
+  //
+  //    &[data-#{$prefix}-seek-direction='rewind'] {
+  //      left: 0;
+  //    }
+  //  }
+  //}
 }

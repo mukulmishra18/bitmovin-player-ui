@@ -957,9 +957,9 @@ export class SeekBar extends Component<SeekBarConfig> {
         '-webkit-transform': 'scaleY(' + scale + ')',
       } :
       {
-        'transform': 'scaleX(' + scale + ')',
-        '-ms-transform': 'scaleX(' + scale + ')',
-        '-webkit-transform': 'scaleX(' + scale + ')',
+        'width': percent + '%',
+        // '-ms-transform': 'scaleX(' + scale + ')',
+        // '-webkit-transform': 'scaleX(' + scale + ')',
       };
     element.css(style);
   }

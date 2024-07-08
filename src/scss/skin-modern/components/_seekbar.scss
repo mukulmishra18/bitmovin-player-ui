@@ -20,6 +20,7 @@ $seekbar-height: .3125em;
   .#{$prefix}-seekbar {
 
     %bar {
+      border-radius: 25px;
       // sass-lint:disable no-vendor-prefixes
       -ms-transform-origin: 0 0; // required for IE9
       -webkit-transform-origin: 0 0; // required for Android 4.4 WebView
@@ -61,16 +62,18 @@ $seekbar-height: .3125em;
       background-color: $color-highlight;
       margin: $bar-inset 0;
       transition: .1s linear, .1s linear;
-      transition-property: transform;
+      transition-property: width;
     }
 
     .#{$prefix}-seekbar-playbackposition-marker {
       @extend %bar;
       @include seekbar-position-marker($seekbar-height * 3);
 
-      background-color: transparentize($color-highlight, .5);
+      background-color: $color-highlight;
+      //background-color: transparentize($color-highlight, .5);
       border: solid $color-highlight .1875em;
       border-radius: 50%;
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
     }
 
     .#{$prefix}-seekbar-markers {
