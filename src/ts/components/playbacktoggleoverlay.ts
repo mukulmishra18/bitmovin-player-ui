@@ -198,5 +198,15 @@ export class SidebarToggleButton extends ToggleButton<ToggleButtonConfig> {
         }
       }
     });
+
+    if (window.bitmovin.customMessageHandler) {
+      window.bitmovin.customMessageHandler.on('toggleSidebarButton', (data?: string) => {
+        if (this.isOn()) {
+          this.off();
+        } else {
+          this.on();
+        }
+      });
+    }
   }
 }
