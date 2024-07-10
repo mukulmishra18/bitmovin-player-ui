@@ -3,8 +3,79 @@
 
 .#{$prefix}-ui-playbacktoggle-overlay {
   @extend %ui-container;
+  @include layout-cover;
+  @include hidden-animated-focusable;
 
-  .#{$prefix}-ui-hugeplaybacktogglebutton {
+  pointer-events: none;
+
+  > .#{$prefix}-container-wrapper {
     @include layout-cover;
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .#{$prefix}-ui-playbacktogglebutton {
+    height: 4em;
+    width: 4em;
+    background-size: 4em;
+    flex-grow: 1;
+  }
+}
+
+.#{$prefix}-ui-tile-overlay {
+  @include layout-cover;
+  @include hidden-animated-focusable;
+
+  > .#{$prefix}-container-wrapper {
+    @include layout-cover;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row: auto auto;
+  }
+
+  .#{$prefix}-ui-tile-select-button {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+
+    &.#{$prefix}-on {
+      grid-column-start: 1;
+      grid-column-end: span 2;
+      grid-row-start: 1;
+      grid-row-end: span 2;
+    }
+  }
+
+  :has(> .#{$prefix}-on) {
+    .#{$prefix}-off {
+      display: none;
+    }
+  }
+}
+
+.#{$prefix}-ui-grid-toggle-button {
+  @extend %ui-button;
+  @include hidden-animated;
+
+  background-image: url('../../assets/skin-modern/images/grid-outline.svg');
+
+  &:hover {
+    @include svg-icon-shadow;
+  }
+}
+
+.#{$prefix}-ui-sidebar-toggle-button {
+  @extend %ui-button;
+  @include hidden-animated;
+
+  &:hover {
+    @include svg-icon-shadow;
+  }
+
+  background-image: url('../../assets/skin-modern/images/sidebar.svg');
+
+  &.#{$prefix}-on {
+    background-image: url('../../assets/skin-modern/images/sidebarX.svg');
   }
 }

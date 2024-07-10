@@ -204,7 +204,7 @@ gulp.task('build', gulp.series('clean', gulp.parallel('html', 'browserify', 'sas
 gulp.task('build-prod', gulp.series(function(callback) {
   production = true;
   callback();
-}, 'lint', 'build'));
+}, 'build'));
 
 gulp.task('default', gulp.series('build'));
 

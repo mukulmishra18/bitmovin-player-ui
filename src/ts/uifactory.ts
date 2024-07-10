@@ -27,7 +27,12 @@ import { SettingsToggleButton } from './components/settingstogglebutton';
 import { FullscreenToggleButton } from './components/fullscreentogglebutton';
 import { UIContainer } from './components/uicontainer';
 import { BufferingOverlay } from './components/bufferingoverlay';
-import { PlaybackToggleOverlay } from './components/playbacktoggleoverlay';
+import {
+  GridToggleButton,
+  PlaybackToggleOverlay,
+  SidebarToggleButton,
+  TileOverlay
+} from './components/playbacktoggleoverlay';
 import { CastStatusOverlay } from './components/caststatusoverlay';
 import { TitleBar } from './components/titlebar';
 import { RecommendationOverlay } from './components/recommendationoverlay';
@@ -296,19 +301,28 @@ export namespace UIFactory {
         subtitleOverlay,
         new BufferingOverlay(),
         new CastStatusOverlay(),
-        new PlaybackToggleOverlay(),
-        new RecommendationOverlay(),
+          new TileOverlay(),
+        new PlaybackToggleOverlay({
+          components: [
+              new Spacer(),
+            new PlaybackToggleButton(),
+              new Spacer(),
+          ],
+        }),
+        // new RecommendationOverlay(),
         controlBar,
         new TitleBar({
           components: [
             new MetadataLabel({ content: MetadataLabelContent.Title }),
-            new CastToggleButton(),
-            new VRToggleButton(),
-            new PictureInPictureToggleButton(),
-            new AirPlayToggleButton(),
+            new GridToggleButton(),
+            new SidebarToggleButton(),
+            // new CastToggleButton(),
+            // new VRToggleButton(),
+            // new PictureInPictureToggleButton(),
+            // new AirPlayToggleButton(),
             new VolumeToggleButton(),
-            new SettingsToggleButton({ settingsPanel: settingsPanel }),
-            new FullscreenToggleButton(),
+            // new SettingsToggleButton({ settingsPanel: settingsPanel }),
+            // new FullscreenToggleButton(),
           ],
         }),
         settingsPanel,
