@@ -195,18 +195,18 @@ export class UIContainer extends Container<UIContainerConfig> {
           }
         }
       },
-    // }, {
-    //   // When the mouse enters, we show the UI
-    //   name: 'mouseenter',
-    //   handler: () => {
-    //     this.showUi();
-    //   },
-    // }, {
-    //   // When the mouse moves within, we show the UI
-    //   name: 'mousemove',
-    //   handler: () => {
-    //     this.showUi();
-    //   },
+    }, {
+      // When the mouse enters, we show the UI
+      name: 'mouseenter',
+      handler: () => {
+        this.showUi();
+      },
+    }, {
+      // When the mouse moves within, we show the UI
+      name: 'mousemove',
+      handler: () => {
+        this.showUi();
+      },
     // }, {
     //   name: 'focusin',
     //   handler: () => {
@@ -217,20 +217,20 @@ export class UIContainer extends Container<UIContainerConfig> {
       handler: () => {
         this.showUi();
       },
-    // }, {
-    //   // When the mouse leaves, we can prepare to hide the UI, except a seek is going on
-    //   name: 'mouseleave',
-    //   handler: () => {
-    //     // When a seek is going on, the seek scrub pointer may exit the UI area while still seeking, and we do not
-    //     // hide the UI in such cases
-    //     if (!isSeeking && !hidingPrevented()) {
-    //       if (this.config.hideImmediatelyOnMouseLeave) {
-    //         this.hideUi();
-    //       } else {
-    //         this.uiHideTimeout.start();
-    //       }
-    //     }
-    //   },
+    }, {
+      // When the mouse leaves, we can prepare to hide the UI, except a seek is going on
+      name: 'mouseleave',
+      handler: () => {
+        // When a seek is going on, the seek scrub pointer may exit the UI area while still seeking, and we do not
+        // hide the UI in such cases
+        if (!isSeeking && !hidingPrevented()) {
+          if (this.config.hideImmediatelyOnMouseLeave) {
+            this.hideUi();
+          } else {
+            this.uiHideTimeout.start();
+          }
+        }
+      },
     }];
 
     this.userInteractionEvents.forEach((event) => this.userInteractionEventSource.on(event.name, event.handler));
