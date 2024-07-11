@@ -56,7 +56,6 @@
 
 .#{$prefix}-ui-grid-toggle-button {
   @extend %ui-button;
-  @include hidden-animated;
 
   background-image: url('../../assets/skin-modern/images/grid-outline.svg');
 
@@ -67,7 +66,6 @@
 
 .#{$prefix}-ui-sidebar-toggle-button {
   @extend %ui-button;
-  @include hidden-animated;
 
   &:hover {
     @include svg-icon-shadow;
