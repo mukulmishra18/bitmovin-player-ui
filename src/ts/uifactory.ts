@@ -592,7 +592,7 @@ export namespace UIFactory {
     });
 
     const spatialNavigation = new SpatialNavigation(
-      new RootNavigationGroup(uiContainer, playbackToggleOverlay, tiledOverlay, seekBar, audioToggleButton, subtitleToggleButton),
+      new RootNavigationGroup(uiContainer, playbackToggleOverlay, tiledOverlay, gridToggleButton, seekBar, audioToggleButton, subtitleToggleButton),
       new ListNavigationGroup(ListOrientation.Vertical, subtitleListPanel, subtitleListBox),
       new ListNavigationGroup(ListOrientation.Vertical, audioTrackListPanel, audioTrackListBox),
     );
