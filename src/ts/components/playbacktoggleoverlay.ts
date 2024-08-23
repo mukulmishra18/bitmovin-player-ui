@@ -97,27 +97,15 @@ export class TileSelectButton extends ToggleButton<TileSelectButtonConfig> {
     });
 
     this.onClick.subscribe(() => {
-      if (this.isOn()) {
-        this.off();
+      this.on();
 
-        (uimanager as any).getWrappedPlayer().fireEventInUI('tileSelected', { tileIndex: null });
+      (uimanager as any).getWrappedPlayer().fireEventInUI('tileSelected', { tileIndex: this.config.tileIndex });
 
-        if (window.bitmovin.customMessageHandler) {
-          window.bitmovin.customMessageHandler.sendSynchronous(
-            'openGrid',
-          );
-        }
-      } else {
-        this.on();
-
-        (uimanager as any).getWrappedPlayer().fireEventInUI('tileSelected', { tileIndex: this.config.tileIndex });
-
-        if (window.bitmovin.customMessageHandler) {
-          window.bitmovin.customMessageHandler.sendSynchronous(
-            'selectTile',
-            JSON.stringify({ tileIndex: this.config.tileIndex }),
-          );
-        }
+      if (window.bitmovin.customMessageHandler) {
+        window.bitmovin.customMessageHandler.sendSynchronous(
+          'selectTile',
+          JSON.stringify({ tileIndex: this.config.tileIndex }),
+        );
       }
     });
   }

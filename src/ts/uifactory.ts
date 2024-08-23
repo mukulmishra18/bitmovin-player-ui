@@ -164,7 +164,7 @@ export namespace UIFactory {
             // new VRToggleButton(),
             // new SettingsToggleButton({ settingsPanel: settingsPanel }),
             new GridToggleButton(),
-            new SidebarToggleButton(),
+            // new SidebarToggleButton(),
             new FullscreenToggleButton(),
           ],
           cssClasses: ['controlbar-bottom'],
@@ -177,13 +177,13 @@ export namespace UIFactory {
         subtitleOverlay,
         new BufferingOverlay(),
         new TileOverlay(),
-        new PlaybackToggleOverlay({
-          components: [
-            new Spacer(),
-            new PlaybackToggleButton(),
-            new Spacer(),
-          ],
-        }),
+        // new PlaybackToggleOverlay({
+        //   components: [
+        //     new Spacer(),
+        //     new PlaybackToggleButton(),
+        //     new Spacer(),
+        //   ],
+        // }),
         new CastStatusOverlay(),
         controlBar,
         new TitleBar(),
@@ -519,6 +519,8 @@ export namespace UIFactory {
 
     const seekBar = new SeekBar({ label: new SeekBarLabel() });
     const playbackToggleOverlay = new PlaybackToggleOverlay();
+    const tiledOverlay = new TileOverlay();
+    const gridToggleButton = new GridToggleButton();
     const subtitleToggleButton = new SettingsToggleButton({
       settingsPanel: subtitleListPanel,
       autoHideWhenNoActiveSettings: true,
@@ -536,6 +538,7 @@ export namespace UIFactory {
       components: [
         new SubtitleOverlay(),
         new BufferingOverlay(),
+        tiledOverlay,
         playbackToggleOverlay,
         new ControlBar({
           components: [
@@ -560,6 +563,7 @@ export namespace UIFactory {
             new Container({
               components: [
                 new MetadataLabel({ content: MetadataLabelContent.Title }),
+                gridToggleButton,
                 subtitleToggleButton,
                 audioToggleButton,
               ],
@@ -588,7 +592,7 @@ export namespace UIFactory {
     });
 
     const spatialNavigation = new SpatialNavigation(
-      new RootNavigationGroup(uiContainer, playbackToggleOverlay, seekBar, audioToggleButton, subtitleToggleButton),
+      new RootNavigationGroup(uiContainer, playbackToggleOverlay, tiledOverlay, seekBar, audioToggleButton, subtitleToggleButton),
       new ListNavigationGroup(ListOrientation.Vertical, subtitleListPanel, subtitleListBox),
       new ListNavigationGroup(ListOrientation.Vertical, audioTrackListPanel, audioTrackListBox),
     );
