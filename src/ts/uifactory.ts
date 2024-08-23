@@ -543,17 +543,17 @@ export namespace UIFactory {
         new ControlBar({
           components: [
             new Container({
-              components: [
-                new PlaybackTimeLabel({
-                  timeLabelMode: PlaybackTimeLabelMode.CurrentTime,
-                  hideInLivePlayback: true,
-                }),
-                seekBar,
-                new PlaybackTimeLabel({
-                  timeLabelMode: PlaybackTimeLabelMode.RemainingTime,
-                  cssClasses: ['text-right'],
-                }),
-              ],
+              // components: [
+              //   new PlaybackTimeLabel({
+              //     timeLabelMode: PlaybackTimeLabelMode.CurrentTime,
+              //     hideInLivePlayback: true,
+              //   }),
+              //   seekBar,
+              //   new PlaybackTimeLabel({
+              //     timeLabelMode: PlaybackTimeLabelMode.RemainingTime,
+              //     cssClasses: ['text-right'],
+              //   }),
+              // ],
               cssClasses: ['controlbar-top'],
             }),
           ],
@@ -564,17 +564,17 @@ export namespace UIFactory {
               components: [
                 new MetadataLabel({ content: MetadataLabelContent.Title }),
                 gridToggleButton,
-                subtitleToggleButton,
-                audioToggleButton,
+                // subtitleToggleButton,
+                // audioToggleButton,
               ],
               cssClasses: ['ui-titlebar-top'],
             }),
             new Container({
-              components: [
-                new MetadataLabel({ content: MetadataLabelContent.Description }),
-                subtitleListPanel,
-                audioTrackListPanel,
-              ],
+              // components: [
+              //   new MetadataLabel({ content: MetadataLabelContent.Description }),
+              //   subtitleListPanel,
+              //   audioTrackListPanel,
+              // ],
               cssClasses: ['ui-titlebar-bottom'],
             }),
           ],
